@@ -1,0 +1,174 @@
+[
+    {
+      "us_id": "US001",
+      "chapter": "Introduction",
+      "prompt_template": "Tu es un rédacteur académique spécialisé dans les rapports de mission professionnelle, maîtrisant le style de citation {{ citation_style }}. À partir des informations fournies sur l'entreprise d'accueil, le contexte de la mission, les objectifs pédagogiques et professionnels, et les compétences RNCP visées :\n\nCONTEXTE ENTREPRISE ET MISSION :\n{{ mission_context }}\n\nINFORMATIONS ENTREPRISE (secteur, organigramme, business model, positionnement, offre, concurrents, stratégie) :\n{{ company_analysis_data }}\n\nOBJECTIFS DU MÉMOIRE :\n{{ memoire_objectives }}\n\nCOMPÉTENCES RNCP 35284 PERTINENTES :\n{{ rncp_skills_list }}\n\nRédige une introduction d'environ {{ target_word_count | default(900) }} mots pour un mémoire de Mission Professionnelle. Adopte un ton académique et formel. L'introduction doit impérativement couvrir :\n1.  Présentation de l'entreprise, de son secteur d'activité et du contexte général de la mission.\n2.  Analyse de l'entreprise (éléments clés : organigramme, business model, positionnement, offre, concurrents, stratégie).\n3.  Clarification des objectifs spécifiques du mémoire.\n4.  Explication du lien entre les objectifs du mémoire, les compétences RNCP visées et les objectifs de la mission professionnelle.\nAssure la cohérence et la clarté de l'ensemble. Utilise le style {{ citation_style }} pour toute référence éventuelle. <END_PROMPT>",
+      "acceptance_criteria": {
+        "min_words": 800,
+        "required_sections": [
+          "Présentation entreprise et contexte mission",
+          "Analyse entreprise (organigramme, business model, positionnement, offre, concurrents, stratégie)",
+          "Objectifs du mémoire",
+          "Lien objectifs mémoire - compétences RNCP - objectifs mission"
+        ],
+        "style": "{{ citation_style }}",
+        "tone": "Academic, Formal"
+      },
+      "refinement_prompt": "La version précédente de l'introduction présente les problèmes suivants : \n{% if missing_sections %}- Sections manquantes ou incomplètes : {{ missing_sections | join(', ') }}.\n{% endif %}{% if lack_of_detail_points %}- Manque de détails sur : {{ lack_of_detail_points | join(', ') }}.\n{% endif %}{% if style_errors %}- Problèmes de style ou de formatage : {{ style_errors }}.\n{% endif %}\nMerci de régénérer l'introduction en corrigeant ces points, en assurant que toutes les sections requises sont couvertes en détail et en respectant strictement le ton académique et le style {{ citation_style }}. <END_PROMPT>"
+    },
+    {
+      "us_id": "US002",
+      "chapter": "Description de la Mission Professionnelle",
+      "prompt_template": "Tu es un rédacteur technique et académique. À partir des informations détaillées sur la mission professionnelle (fiche de poste, tâches, responsabilités, projets, rôle, processus, initiatives) :\n\nFICHE DE POSTE :\n{{ job_description }}\n\nTÂCHES RÉALISÉES :\n{{ task_details }}\n\nRESPONSABILITÉS ASSUMÉES :\n{{ responsibilities }}\n\nPROJETS PARTICIPÉS :\n{{ project_examples }}\n\nPOSITION/RÔLE DANS L'ÉQUIPE/PROJET :\n{{ role_description }}\n\nPROCESSUS IMPLIQUÉS :\n{{ process_details }}\n\nINITIATIVES PRISES :\n{{ initiatives_taken }}\n\nRédige le chapitre 'Description de la Mission Professionnelle' d'environ {{ target_word_count | default(1800) }} mots. Adopte un ton descriptif, précis et professionnel. Le chapitre doit détailler :\n1.  L'explication de la fiche de poste.\n2.  La description détaillée des tâches réalisées.\n3.  La précision des responsabilités assumées.\n4.  La mention et description des projets auxquels tu as participé.\n5.  La description de ta position et de ton rôle au sein de l'équipe ou du projet.\n6.  La description des processus dans lesquels tu es intervenu(e).\n7.  La précision de tes initiatives durant la mission.\nStructure le texte de manière logique et claire. Utilise le style {{ citation_style }} si des références sont nécessaires. <END_PROMPT>",
+      "acceptance_criteria": {
+        "min_words": 1600,
+        "required_sections": [
+          "Explication fiche de poste",
+          "Description détaillée des tâches",
+          "Précision des responsabilités",
+          "Description des projets",
+          "Description position et rôle",
+          "Description des processus",
+          "Précision des initiatives"
+        ],
+        "style": "{{ citation_style }}",
+        "tone": "Descriptive, Precise, Professional"
+      },
+      "refinement_prompt": "La description de la mission professionnelle est incomplète ou manque de clarté sur certains points :\n{% if missing_sections %}- Sections manquantes : {{ missing_sections | join(', ') }}.\n{% endif %}{% if lack_of_detail_points %}- Manque de détails ou d'exemples concrets concernant : {{ lack_of_detail_points | join(', ') }}.\n{% endif %}\nMerci de réviser ce chapitre pour fournir une description exhaustive et précise de tous les aspects de la mission, en suivant la structure demandée et en maintenant un ton professionnel. <END_PROMPT>"
+    },
+    {
+      "us_id": "US003",
+      "chapter": "Analyse des Compétences Développées",
+      "prompt_template": "Tu es un analyste spécialisé dans le développement des compétences professionnelles et la certification RNCP. À partir de la liste des compétences clés du titre RNCP 35284, des détails de la mission réalisée, et des connaissances théoriques acquises en formation :\n\nCOMPÉTENCES RNCP 35284 VISÉES/DÉVELOPPÉES :\n{{ rncp_skills_list }}\n\nCONTEXTE DE LA MISSION ET EXEMPLES CONCRETS :\n{{ mission_data_for_skills }}\n\nCONNAISSANCES DE FORMATION PERTINENTES :\n{{ course_knowledge }}\n\nRédige le chapitre 'Analyse des Compétences Développées' d'environ {{ target_word_count | default(1200) }} mots. Adopte un ton analytique et réflexif. Le chapitre doit :\n1.  Identifier et discuter les compétences clés (du référentiel RNCP) développées ou améliorées durant la mission.\n2.  Établir clairement le lien entre ces compétences et les exigences spécifiques du titre RNCP 35284.\n3.  Fournir des exemples concrets et détaillés illustrant comment les connaissances acquises en formation ont été appliquées en situation professionnelle réelle et complexe pour développer ces compétences.\nAssure-toi que l'analyse est argumentée et appuyée par des preuves issues de l'expérience. Utilise le style {{ citation_style }}. <END_PROMPT>",
+      "acceptance_criteria": {
+        "min_words": 1000,
+        "required_sections": [
+          "Identification et discussion des compétences clés développées/améliorées",
+          "Lien explicite compétences - exigences RNCP 35284",
+          "Exemples concrets d'application des connaissances de formation en situation complexe"
+        ],
+        "style": "{{ citation_style }}",
+        "tone": "Analytical, Reflective"
+      },
+      "refinement_prompt": "L'analyse des compétences développées présente des faiblesses :\n{% if missing_skills_analysis %}- L'analyse des compétences suivantes est manquante ou superficielle : {{ missing_skills_analysis | join(', ') }}.\n{% endif %}{% if weak_rncp_link %}- Le lien avec les exigences RNCP n'est pas assez explicite pour : {{ weak_rncp_link | join(', ') }}.\n{% endif %}{% if missing_examples %}- Manque d'exemples concrets et détaillés pour illustrer l'application des connaissances concernant : {{ missing_examples | join(', ') }}.\n{% endif %}\nMerci de réviser ce chapitre pour renforcer l'analyse, expliciter les liens avec le RNCP et fournir des exemples probants pour chaque compétence discutée. <END_PROMPT>"
+    },
+    {
+      "us_id": "US004",
+      "chapter": "Évaluation de la Performance",
+      "prompt_template": "Tu es un évaluateur objectif et constructif, spécialisé dans l'analyse de performance en contexte professionnel. À partir des exemples de réalisations durant la mission, des feedbacks reçus, et des éléments préparatoires pour l'auto-évaluation et le portfolio de compétences :\n\nEXEMPLES DE RÉALISATIONS ET PERFORMANCE :\n{{ performance_examples }}\n\nFEEDBACKS REÇUS (formels/informels) :\n{{ performance_feedback }}\n\nÉLÉMENTS D'AUTO-ÉVALUATION :\n{{ self_assessment_points }}\n\nINFORMATIONS PORTFOLIO DE COMPÉTENCES :\n{{ portfolio_info }}\n\nRédige le chapitre 'Évaluation de la Performance' d'environ {{ target_word_count | default(1000) }} mots. Adopte un ton évaluatif et critique (auto-critique). Le chapitre doit :\n1.  Analyser ta performance durant la mission en t'appuyant sur des exemples spécifiques et mesurables si possible.\n2.  Intégrer et discuter les feedbacks reçus (formels ou informels) dans l'analyse.\n3.  Réaliser une auto-évaluation critique de ta performance, en identifiant points forts et axes d'amélioration.\n4.  Mentionner comment cette évaluation contribue au remplissage du portfolio de compétences en vue de la présentation au jury.\nSois honnête et équilibré dans ton évaluation. Utilise le style {{ citation_style }}. <END_PROMPT>",
+      "acceptance_criteria": {
+        "min_words": 800,
+        "required_sections": [
+          "Analyse de performance avec exemples spécifiques",
+          "Utilisation et discussion des feedbacks reçus",
+          "Auto-évaluation critique (points forts, axes d'amélioration)",
+          "Lien avec la préparation du portfolio de compétences"
+        ],
+        "style": "{{ citation_style }}",
+        "tone": "Evaluative, Critical, Self-reflective"
+      },
+      "refinement_prompt": "L'évaluation de la performance manque de profondeur ou de preuves :\n{% if missing_specific_examples %}- L'analyse manque d'exemples spécifiques et concrets pour étayer l'évaluation.\n{% endif %}{% if missing_feedback_integration %}- Les feedbacks reçus ne sont pas suffisamment intégrés ou discutés.\n{% endif %}{% if superficial_self_assessment %}- L'auto-évaluation manque de recul critique ou d'équilibre.\n{% endif %}{% if missing_portfolio_link %}- Le lien avec la préparation du portfolio n'est pas établi.\n{% endif %}\nMerci de réviser ce chapitre pour fournir une évaluation mieux argumentée, intégrant les feedbacks, faisant preuve d'une réelle auto-critique et liant l'analyse au portfolio. <END_PROMPT>"
+    },
+    {
+      "us_id": "US005",
+      "chapter": "Réflexion Personnelle et Professionnelle",
+      "prompt_template": "Tu es un coach en développement personnel et professionnel. À partir des informations sur l'expérience en entreprise (intégration, impact du travail, évolution, points à améliorer) :\n\nEXPÉRIENCE D'INTÉGRATION :\n{{ integration_experience }}\n\nANALYSE DE L'IMPACT DU TRAVAIL :\n{{ work_impact_details }}\n\nPOINTS D'ÉVOLUTION PERSONNELLE OBSERVÉS :\n{{ personal_growth_points }}\n\nDOMAINES D'AMÉLIORATION IDENTIFIÉS :\n{{ improvement_areas }}\n\nPISTES POUR LE DÉVELOPPEMENT FUTUR :\n{{ future_development_skills }}\n\nRédige le chapitre 'Réflexion Personnelle et Professionnelle' d'environ {{ target_word_count | default(1000) }} mots. Adopte un ton réflexif, introspectif et prospectif. Le chapitre doit aborder :\n1.  Une réflexion sur ton intégration au sein de l'entreprise et de l'équipe.\n2.  Une analyse de l'impact concret de ton travail sur l'entreprise ou le projet.\n3.  Une discussion sur ton évolution personnelle (maturité, confiance, compétences comportementales...) durant la mission.\n4.  L'identification honnête de tes domaines d'amélioration.\n5.  La liste et la discussion des compétences que tu souhaites développer pour ta future carrière.\nStructure ta réflexion de manière cohérente. Utilise le style {{ citation_style }}. <END_PROMPT>",
+      "acceptance_criteria": {
+        "min_words": 800,
+        "required_sections": [
+          "Réflexion sur l'intégration",
+          "Analyse de l'impact du travail",
+          "Discussion sur l'évolution personnelle",
+          "Identification des domaines d'amélioration",
+          "Liste et discussion des compétences à développer pour le futur"
+        ],
+        "style": "{{ citation_style }}",
+        "tone": "Reflective, Introspective, Prospective"
+      },
+      "refinement_prompt": "La réflexion personnelle et professionnelle manque de profondeur ou de structure :\n{% if superficial_reflection %}- La réflexion sur les points suivants est superficielle : {{ superficial_reflection | join(', ') }}.\n{% endif %}{% if missing_impact_analysis %}- L'analyse de l'impact du travail n'est pas suffisamment développée ou étayée.\n{% endif %}{% if vague_future_plans %}- Les plans de développement futurs ou les compétences à développer sont vagues ou peu discutés.\n{% endif %}\nMerci de réviser ce chapitre pour approfondir la réflexion sur chaque point, en particulier l'impact du travail et les perspectives de développement futur. <END_PROMPT>"
+    },
+    {
+      "us_id": "US006",
+      "chapter": "Conclusion",
+      "prompt_template": "Tu es un rédacteur académique chargé de synthétiser les points clés d'un mémoire de Mission Professionnelle. À partir des principaux apprentissages (compétences, connaissances, développement personnel) et des réflexions sur l'avenir professionnel :\n\nSYNTHÈSE DES APPRENTISSAGES CLÉS :\n{{ key_learnings_summary }}\n\nRÉFLEXIONS SUR LA TRAJECTOIRE PROFESSIONNELLE FUTURE :\n{{ future_career_reflections }}\n\nPOINTS CLÉS DU MÉMOIRE À RÉSUMER :\n{{ report_key_points }}\n\nRédige la conclusion du mémoire d'environ {{ target_word_count | default(600) }} mots. Adopte un ton synthétique et conclusif. La conclusion doit :\n1.  Présenter une synthèse claire des principaux apprentissages réalisés durant la mission (compétences acquises/renforcées, connaissances nouvelles, développement personnel).\n2.  Discuter des implications de cette expérience professionnelle pour ta trajectoire future et tes objectifs de carrière.\n3.  Résumer brièvement les points essentiels abordés dans le mémoire (rappel du contexte/objectifs, principaux résultats/analyses).\nAssure une fermeture cohérente et logique du rapport. Utilise le style {{ citation_style }}. <END_PROMPT>",
+      "acceptance_criteria": {
+        "min_words": 500,
+        "required_sections": [
+          "Synthèse des apprentissages (compétences, connaissances, développement personnel)",
+          "Discussion des implications pour la trajectoire professionnelle future",
+          "Résumé des points clés du mémoire"
+        ],
+        "style": "{{ citation_style }}",
+        "tone": "Synthetic, Conclusive"
+      },
+      "refinement_prompt": "La conclusion actuelle présente des lacunes :\n{% if weak_synthesis %}- La synthèse des apprentissages est incomplète ou manque de clarté.\n{% endif %}{% if missing_future_implications %}- La discussion sur les implications futures pour la carrière est absente ou peu développée.\n{% endif %}{% if incomplete_summary %}- Le résumé des points clés du mémoire n'est pas suffisant.\n{% endif %}\nMerci de réviser la conclusion pour qu'elle synthétise efficacement les apprentissages, discute des perspectives d'avenir et résume les points essentiels du mémoire de manière concise et percutante. <END_PROMPT>"
+    },
+    {
+      "us_id": "US007",
+      "chapter": "Annexes",
+      "prompt_template": "Tu es un assistant de rédaction chargé de générer la page listant les annexes d'un mémoire académique. À partir de la liste des documents et informations à inclure en annexe :\n\nLISTE DES DOCUMENTS ET LIENS POUR ANNEXES :\n{{ annex_list_details }} (incluant description des rapports, statut CV, liens/QR codes Book/LinkedIn)\n\nRédige la page 'Liste des Annexes'. Chaque élément doit être clairement identifié, numéroté (ou lettré) et titré. Assure-toi de mentionner explicitement :\n- Les documents pertinents (rapports de projet, évaluations, bilan annuel, etc.).\n- Le CV à jour (en précisant qu'il inclut photo, parcours, formations, langues, et les QR codes/liens vers Book/LinkedIn).\n- La référence au Book à jour (mentionnant le QR code/lien fourni dans l'annexe dédiée).\n- La référence au profil LinkedIn à jour (mentionnant le QR code/lien fourni dans l'annexe dédiée).\nIndique que ces éléments sont disponibles dans la section des annexes. Assure une présentation claire et professionnelle, cohérente avec le style {{ citation_style }} du document principal. <END_PROMPT>",
+      "acceptance_criteria": {
+        "min_items": 4,
+        "required_elements": [
+          "Liste numérotée/lettrée et titrée des annexes",
+          "Mention des documents pertinents",
+          "Mention du CV à jour (avec détails: photo, parcours, formation, langues, QR/liens Book/LinkedIn)",
+          "Mention du Book à jour (avec référence QR/lien)",
+          "Mention du profil LinkedIn à jour (avec référence QR/lien)"
+        ],
+        "style": "{{ citation_style }} (pour la mise en forme de la liste)",
+        "presentation": "Clear, Professional"
+      },
+      "refinement_prompt": "La liste des annexes générée est incomplète ou mal formatée :\n{% if missing_annexes %}- Les annexes suivantes sont manquantes ou mal décrites : {{ missing_annexes | join(', ') }}.\n{% endif %}{% if formatting_issues %}- Le formatage de la liste (numérotation, titres) n'est pas clair ou cohérent.\n{% endif %}{% if missing_details %}- Des détails importants manquent (ex: contenu du CV, référence aux QR codes/liens).\n{% endif %}\nMerci de corriger la liste pour qu'elle soit complète, correctement formatée et contienne toutes les informations requises pour chaque annexe. <END_PROMPT>"
+    },
+     {
+      "us_id": "US008",
+      "chapter": "_Global Formatting_",
+      "prompt_template": "RAPPEL GLOBAL DE FORMATAGE : Pour la génération de toutes les sections de ce mémoire, tu dois impérativement respecter les consignes suivantes :\n- Longueur totale : Le corps du mémoire (hors annexes) doit atteindre un minimum de 30 pages.\n- Police : Utiliser exclusivement Times New Roman, taille 12 points.\n- Interligne : Appliquer un interligne de 1.5.\n- Alignement : Justifier le texte.\n- Mise en page : Assurer une présentation globale propre, aérée et professionnelle.\n- Citations et Bibliographie : Appliquer de manière stricte et cohérente le style de citation {{ citation_style }} pour toutes les sources citées dans le texte et dans la liste bibliographique.\nCes règles s'appliquent à l'ensemble du document généré. <END_PROMPT>",
+      "acceptance_criteria": {
+        "min_pages_overall": 30,
+        "font": "Times New Roman 12pt",
+        "line_spacing": 1.5,
+        "alignment": "justified",
+        "layout": "professional",
+        "style": "{{ citation_style }} (consistent throughout)"
+      },
+      "refinement_prompt": "Le document généré ne respecte pas les règles de formatage globales. Points à corriger :\n{% if formatting_errors %}- Erreurs de formatage détectées : {{ formatting_errors | join(', ') }} (ex: police, interligne, justification, style de citation {{ citation_style }}).\n{% endif %}{% if length_issue %}- Longueur totale insuffisante.\n{% endif %}\nMerci de régénérer le contenu en appliquant strictement toutes les consignes de formatage spécifiées. <END_PROMPT>"
+    },
+    {
+      "us_id": "US009",
+      "chapter": "Préparation de la Soutenance Orale (Plan/Script)",
+      "prompt_template": "Tu es un coach expert en communication orale académique et professionnelle. À partir des informations clés du mémoire et du profil professionnel de l'étudiant(e) :\n\nSYNTHÈSE DU MÉMOIRE (contexte, mission, objectifs, réalisations, compétences, apports, enjeux, perspectives) :\n{{ report_summary }}\n\nPROFIL PROFESSIONNEL (Points forts/faibles, compétences, créativité, recommandations, LinkedIn/Book) :\n{{ professional_profile }}\n\nPLAN DE COMPÉTENCES FINAL (AUTO-ÉVALUATION) :\n{{ skills_plan_summary }}\n\nRédige un plan détaillé ou un script pour la soutenance orale de la Mission Professionnelle. Adopte un ton dynamique, clair et professionnel. La structure doit être la suivante :\n1.  **Partie 1 : Analyse de la mission (Durée indicative : 10 minutes)**\n    - Contexte et objectifs de la mission.\n    - Principales réalisations et résultats obtenus.\n    - Apports personnels (savoir-faire techniques, savoir-être développés).\n    - Enjeux rencontrés et perspectives ouvertes par la mission.\n2.  **Partie 2 : Présentation du profil professionnel (Durée indicative : 5 minutes)**\n    - Mise en avant des profils LinkedIn et Book (points clés).\n    - Présentation synthétique des points forts et compétences clés.\n    - Exemples de créativité ou d'initiatives.\n    - Recommandations éventuelles pour l'entreprise ou le poste.\n    - Synthèse : 'Mes 10 points forts' et 'Mes 10 axes d'amélioration'.\n3.  **Préparation pour l'échange (Q&A - 15 minutes)**\n    - Points clés à anticiper pour la discussion sur l'autoévaluation des compétences (basée sur le plan de compétences final fourni).\n    - Arguments et exemples pour justifier l'auto-évaluation.\n\nLe document final doit être un outil pratique pour préparer la présentation orale. <END_PROMPT>",
+      "acceptance_criteria": {
+        "required_sections": [
+          "Plan/Script Partie 1 (Analyse mission, 10 min structure)",
+          "Plan/Script Partie 2 (Profil pro, 5 min structure)",
+          "Préparation Q&A (Auto-évaluation compétences, 15 min points clés)"
+        ],
+        "content_coverage": [
+          "contexte", "objectifs", "réalisations", "apports savoir-faire/être", "enjeux/perspectives",
+          "LinkedIn/Book highlights", "points forts", "compétences", "créativité", "recommandations",
+          "10 forces", "10 faiblesses", "points clés auto-évaluation compétences"
+        ],
+        "timing_guidance_included": true,
+        "tone": "Clear, Dynamic, Professional"
+      },
+      "refinement_prompt": "Le plan/script de soutenance généré nécessite des améliorations :\n{% if missing_presentation_parts %}- Les sections suivantes manquent de détails ou sont absentes : {{ missing_presentation_parts | join(', ') }}.\n{% endif %}{% if structure_timing_issue %}- La structure ou la répartition du temps n'est pas respectée.\n{% endif %}{% if lack_of_clarity %}- Certains points manquent de clarté ou ne sont pas assez orientés vers une présentation orale efficace.\n{% endif %}\nMerci de réviser le plan/script pour qu'il soit complet, structuré selon les temps impartis, clair et directement utilisable pour la préparation de la soutenance. <END_PROMPT>"
+    },
+    {
+      "us_id": "US010",
+      "chapter": "Plan de Compétences Final (Contenu pour Auto-évaluation)",
+      "prompt_template": "Tu es un expert en évaluation des compétences RNCP et en rédaction d'auto-évaluations professionnelles. À partir du référentiel de compétences RNCP 35284, des informations détaillées sur la mission effectuée, et des éléments d'auto-réflexion de l'étudiant(e) :\n\nLISTE DES COMPÉTENCES RNCP 35284 :\n{{ rncp_skill_list }}\n\nDONNÉES DE LA MISSION (tâches, projets, réalisations, feedbacks, apprentissages) :\n{{ mission_data_for_skills_assessment }}\n\nDATE LIMITE DE SAISIE :\n{{ deadline }}\n\nRédige le contenu textuel détaillé pour le plan de compétences final en mode auto-évaluation. Pour chaque compétence clé du référentiel RNCP 35284 jugée pertinente et développée durant la mission, fournis :\n1.  Une auto-évaluation argumentée du niveau atteint (ex: débutant, autonome, expert, etc., selon le schéma d'évaluation utilisé).\n2.  Une justification détaillée basée sur des exemples concrets, précis et vérifiables issus de la mission professionnelle (tâches spécifiques, projets menés, problèmes résolus, responsabilités assumées).\nAssure-toi que le texte est formulé de manière professionnelle, honnête et qu'il est prêt à être saisi dans l'outil ou le document officiel avant la date limite du {{ deadline }}. Le ton doit être factuel et démonstratif. <END_PROMPT>",
+      "acceptance_criteria": {
+        "required_content": [
+          "Auto-évaluation argumentée pour chaque compétence RNCP pertinente",
+          "Justification détaillée avec exemples concrets et précis de la mission pour chaque compétence"
+        ],
+        "completeness": "Couvre toutes les compétences pertinentes développées",
+        "deadline_awareness_in_prompt": true,
+        "tone": "Factual, Demonstrative, Professional",
+        "readiness": "Content ready for final input"
+      },
+      "refinement_prompt": "Le contenu généré pour le plan de compétences final nécessite une révision :\n{% if missing_skills_assessment %}- L'auto-évaluation pour les compétences suivantes est manquante ou incomplète : {{ missing_skills_assessment | join(', ') }}.\n{% endif %}{% if weak_justification %}- La justification pour les compétences suivantes manque d'exemples concrets, précis ou pertinents : {{ weak_justification | join(', ') }}.\n{% endif %}{% if assessment_level_unclear %}- Le niveau d'auto-évaluation n'est pas clairement argumenté pour : {{ assessment_level_unclear | join(', ') }}.\n{% endif %}\nMerci de réviser le contenu pour fournir une auto-évaluation complète et solidement justifiée par des exemples factuels pour chaque compétence pertinente, conformément aux exigences du plan de compétences final. <END_PROMPT>"
+    }
+  ]

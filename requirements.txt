@@ -1,0 +1,41 @@
+# --- AGENT_VF/requirements.txt ---
+# Core Frameworks & API
+fastapi>=0.100.0
+uvicorn[standard]>=0.20.0
+pydantic>=2.0.0
+python-dotenv>=1.0.0
+
+# LangChain & LangGraph
+langchain>=0.2.0 # Utiliser une version récente pour les dernières fonctionnalités
+langchain-community>=0.2.0 # Pour Ollama, Chroma, Embeddings HF
+langgraph>=0.1.0
+
+# LLM Client (Ollama)
+# Le client ollama est inclus dans langchain-community
+
+# Vector Database Client (ChromaDB)
+chromadb>=0.4.24 # Version compatible avec LangChain
+
+# Embeddings Model (Sentence Transformers via HuggingFace)
+sentence-transformers>=2.2.0
+# Dépendances sous-jacentes souvent nécessaires pour Sentence Transformers
+# torch>=2.0.0 # Ou tensorflow/jax selon votre backend
+# transformers>=4.30.0
+
+# ETL Dependencies
+python-docx>=1.0.0 # Pour lire les .docx
+PyMuPDF>=1.23.0 # fitz pour lire les .pdf
+spacy>=3.0.0
+# Modèle spaCy français (à installer séparément)
+# fr_core_news_sm # via: python -m spacy download fr_core_news_sm
+
+# Utilities
+requests>=2.28.0 # Souvent utile
+
+# --- Dépendances de Développement ---
+# dev: pytest>=7.0.0
+# dev: pytest-mock>=3.10.0
+# dev: coverage>=7.0.0
+# dev: pytest-asyncio>=0.20.0 # Utile si tests async pour API/LangGraph
+
+# End of file

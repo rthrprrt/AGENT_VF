@@ -1,0 +1,117 @@
+[
+    {
+      "id": "US001",
+      "title": "Rédiger l'introduction du mémoire",
+      "description": "En tant qu'étudiant(e) rédigeant mon mémoire de Mission Professionnelle, je veux décrire l'entreprise, son contexte, et les objectifs du mémoire afin de situer ma mission et d'aligner le rapport avec les attentes pédagogiques et professionnelles.",
+      "acceptance_criteria": [
+        "L'entreprise, son secteur d'activité et le contexte de la mission sont décrits.",
+        "Une analyse fine de l'entreprise est incluse (organigramme, business model, positionnement, offre produit/service, concurrents, stratégie de développement).",
+        "Les objectifs du mémoire sont clarifiés.",
+        "Le lien entre les objectifs du mémoire, les compétences clés du titre RNCP 35284 pertinentes et les objectifs de la mission professionnelle est établi."
+      ]
+    },
+    {
+      "id": "US002",
+      "title": "Décrire la mission professionnelle",
+      "description": "En tant qu'étudiant(e), je veux expliquer en détail ma mission professionnelle afin de montrer les tâches réalisées, les responsabilités assumées et mon rôle au sein de l'organisation.",
+      "acceptance_criteria": [
+        "La fiche de poste est expliquée.",
+        "Les tâches réalisées sont listées et décrites.",
+        "Les responsabilités assumées sont précisées.",
+        "Les projets auxquels j'ai participé sont mentionnés.",
+        "Ma position et mon rôle au sein de l'équipe ou du projet sont décrits.",
+        "Les processus dans lesquels je suis intervenu(e) sont décrits.",
+        "Mes initiatives durant la mission sont précisées."
+      ]
+    },
+    {
+      "id": "US003",
+      "title": "Analyser les compétences développées",
+      "description": "En tant qu'étudiant(e), je veux analyser les compétences clés développées ou améliorées durant ma mission afin de démontrer mon apprentissage et de le relier aux exigences du titre RNCP.",
+      "acceptance_criteria": [
+        "Les compétences clés développées ou améliorées sont identifiées et discutées.",
+        "Le lien entre ces compétences et les exigences du titre RNCP 35284 est établi.",
+        "Des exemples concrets montrent comment les connaissances acquises en formation ont été appliquées en situation professionnelle réelle et complexe."
+      ]
+    },
+    {
+      "id": "US004",
+      "title": "Évaluer la performance",
+      "description": "En tant qu'étudiant(e), je veux évaluer ma performance durant la mission afin de prendre du recul sur mon travail et de préparer mon auto-évaluation.",
+      "acceptance_criteria": [
+        "Ma performance est analysée à l'aide d'exemples spécifiques.",
+        "Les feedbacks reçus (formels ou informels) sont utilisés dans l'analyse.",
+        "Une auto-évaluation critique est réalisée.",
+        "Le portfolio de compétences est rempli en vue de la présentation au jury."
+      ]
+    },
+    {
+      "id": "US005",
+      "title": "Mener une réflexion personnelle et professionnelle",
+      "description": "En tant qu'étudiant(e), je veux réfléchir sur mon expérience en entreprise afin d'évaluer mon intégration, l'impact de mon travail, mon évolution personnelle et d'identifier mes axes de développement futurs.",
+      "acceptance_criteria": [
+        "Une réflexion sur mon intégration dans l'entreprise est menée.",
+        "L'impact de mon travail est analysé.",
+        "Mon évolution personnelle est discutée.",
+        "Des domaines d'amélioration sont identifiés.",
+        "Des compétences à développer pour ma future carrière sont listées."
+      ]
+    },
+    {
+      "id": "US006",
+      "title": "Rédiger la conclusion du mémoire",
+      "description": "En tant qu'étudiant(e), je veux conclure mon mémoire en synthétisant mes apprentissages et en discutant des implications de ma mission pour ma carrière future afin de finaliser mon analyse.",
+      "acceptance_criteria": [
+        "Une synthèse des apprentissages (compétences, connaissances, développement personnel) est présentée.",
+        "Les implications de l'expérience pour ma trajectoire professionnelle future sont discutées.",
+        "La conclusion résume les points clés du mémoire."
+      ]
+    },
+    {
+      "id": "US007",
+      "title": "Préparer et structurer les annexes",
+      "description": "En tant qu'étudiant(e), je veux inclure des annexes pertinentes et à jour afin d'appuyer mon analyse et de fournir les éléments requis.",
+      "acceptance_criteria": [
+        "Les documents pertinents (rapports de projet, évaluations de performance, bilan annuel, etc.) sont inclus en annexe.",
+        "Un CV à jour est inclus (avec photo, parcours pro, formations/certifications, langues, QR code/lien Book, QR code/lien LinkedIn).",
+        "Un Book à jour est référencé (via QR code/lien) et contient les réalisations.",
+        "Un profil LinkedIn à jour est référencé (via QR code/lien) et contient un résumé/présentation, articles/activités, compétences/recommandations.",
+        "Les annexes sont clairement listées et référencées dans le corps du mémoire si nécessaire."
+      ]
+    },
+    {
+      "id": "US008",
+      "title": "Respecter le format et la présentation du mémoire",
+      "description": "En tant qu'étudiant(e), je veux formater mon mémoire selon les consignes afin de garantir sa lisibilité et son professionnalisme.",
+      "acceptance_criteria": [
+        "Le mémoire contient au minimum 30 pages hors annexes.",
+        "La police utilisée est Times New Roman, taille 12.",
+        "L'interligne est de 1.5.",
+        "Le texte est justifié.",
+        "La mise en page globale est propre et professionnelle.",
+        "Un style de citation cohérent (APA ou Harvard) est utilisé pour les citations et la bibliographie."
+      ]
+    },
+    {
+      "id": "US009",
+      "title": "Préparer la soutenance orale",
+      "description": "En tant qu'étudiant(e), je veux préparer une présentation orale claire et structurée de ma Mission Professionnelle afin de la présenter efficacement devant le jury.",
+      "acceptance_criteria": [
+        "Une présentation claire mettant en avant les points clés et contributions principales est préparée.",
+        "Le contenu couvre l'analyse de la mission (contexte, objectifs, réalisations), les apports personnels (savoir-faire, savoir-être), les enjeux et perspectives (10 min).",
+        "Le contenu couvre la présentation du profil professionnel (LinkedIn/Book), les points forts, les compétences, la créativité, les recommandations éventuelles, les 10 points forts, les 10 axes d'amélioration (5 min).",
+        "Je suis préparé(e) pour un échange de 15 minutes sur l'autoévaluation des compétences (basé sur le plan de compétences final).",
+        "Le support de présentation est professionnel et adapté au temps imparti."
+      ]
+    },
+    {
+      "id": "US010",
+      "title": "Finaliser le plan de compétences en auto-évaluation",
+      "description": "En tant qu'étudiant(e), je veux saisir mon plan de compétences final en auto-évaluation avant la date limite afin de fournir les éléments nécessaires à l'échange lors de la soutenance.",
+      "acceptance_criteria": [
+        "Le plan de compétences final est complété.",
+        "L'auto-évaluation des compétences est réalisée.",
+        "Le plan est saisi/soumis avant le 30 mai."
+      ]
+    }
+  ]

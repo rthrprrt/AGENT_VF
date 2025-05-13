@@ -1,0 +1,8 @@
+# requirements-dev.txt
+pytest
+pytest-mock
+typer[all]
+# Ajoutez ici d'autres dépendances nécessaires pour les tests ou le dev
+# comme requests, coverage, etc. si vous les utilisez dans les tests
+requests
+coverage
