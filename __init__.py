@@ -1,4 +1,3 @@
 # --- AGENT_VF/__init__.py ---
-"""Initialise le package principal AGENT_VF."""
-
-# End of file
+# This file makes AGENT_VF a package.
+# It can be empty or contain package-level initializations.

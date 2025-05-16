@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent_vf"
+version = "0.2.0" # Corresponds to API version
+description = "Agent IA de Rédaction de Mémoire (LangGraph)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT License"} # Ou la licence de votre choix
+# authors = [ # Optionnel
+#   {name = "Your Name", email = "you@example.com"},
+# ]
+# maintainers = [ # Optionnel
+#   {name = "Your Name", email = "you@example.com"},
+# ]
+# keywords = ["ai", "langgraph", "rag", "llm", "agent"] # Optionnel
+
+dependencies = [
+    "fastapi>=0.100.0",
+    "uvicorn[standard]>=0.20.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "langchain>=0.2.0",
+    "langchain-community>=0.2.0",
+    "langgraph>=0.1.0",
+    "langgraph-sqlite>=0.1.0", # Pour SqliteSaver
+    "chromadb>=0.4.24",
+    "sentence-transformers>=2.2.0",
+    "python-docx>=1.0.0",
+    "PyMuPDF>=1.23.0", # fitz
+    "spacy>=3.0.0",
+    # "unstructured>=0.12.0", # Déplacé vers optional-dependencies[dev] et [unstructured]
+    "requests>=2.28.0",
+    "torch>=2.0.0", # Souvent requis par sentence-transformers
+    "transformers>=4.30.0" # Souvent requis par sentence-transformers
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-mock>=3.10.0",
+    "coverage>=7.0.0",
+    "pytest-asyncio>=0.20.0",
+    "unstructured[local-inference]>=0.12.0", # Pour les tests nécessitant unstructured
+    # "ruff", # Exemple de linter
+    # "mypy"  # Exemple de type checker
+]
+unstructured = [
+    "unstructured[local-inference]>=0.12.0", # Ou une version plus ciblée comme unstructured[pdf,docx]
+    # Ajoutez ici d'autres dépendances spécifiques à unstructured si nécessaire
+    # par exemple, pour certains formats de fichiers :
+    # "unstructured[docx,pptx,pdf,md,eml,html,xls,xlsx,jpg,png]"
+]
+# Pour installer avec les dépendances de dev: pip install -e .[dev]
+# Pour installer avec les dépendances unstructured: pip install -e .[unstructured]
+
+[project.urls] # Optionnel
+Homepage = "https://github.com/your_username/AGENT_VF"
+Repository = "https://github.com/your_username/AGENT_VF"
+
+[tool.setuptools.packages.find]
+# where = ["."]  # Recherche à la racine (où se trouve pyproject.toml)
+# include = ["AGENT_VF*"] # Inclut le package AGENT_VF et ses sous-modules
+# Si votre code source est dans un sous-répertoire src/AGENT_VF:
+# where = ["src"]
+# include = ["AGENT_VF*"]
+# Pour la structure actuelle où AGENT_VF est à la racine:
+include = ["AGENT_VF*"]
+namespaces = false

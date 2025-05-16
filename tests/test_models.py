@@ -15,6 +15,8 @@ import json
 from AGENT_VF.orchestrator.workflow import run_chapter_generation
 # Importer les tâches ETL
 from AGENT_VF.etl import conversion, extraction, cleaning, transformation, indexation
+# Importer les modèles Pydantic (si utilisés directement ici, sinon via les modules ETL/Orchestrator)
+# from AGENT_VF.core.models import LogEntry # Pas directement utilisé ici, mais bon exemple d'import
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -28,9 +30,6 @@ app = FastAPI(
 
 class IngestRequest(BaseModel):
     directory_path: str
-    use_unstructured_processing: bool = Field(default=False, description="Utiliser Unstructured pour les types de fichiers non gérés nativement.")
-    unstructured_base_output_dir: Optional[str] = Field(default=None, description="Répertoire de base pour les sorties d'Unstructured (ex: images).")
-
 
 class IngestResponse(BaseModel):
     message: str
@@ -52,7 +51,7 @@ async def ingest_documents(request: IngestRequest):
     """
     Lance l'ingestion des documents d'un répertoire spécifié.
     """
-    logging.info(f"Requête d'ingestion reçue pour le répertoire: {request.directory_path}, use_unstructured: {request.use_unstructured_processing}")
+    logging.info(f"Requête d'ingestion reçue pour le répertoire: {request.directory_path}")
     processed_count = 0
     failed_files = []
 
@@ -60,17 +59,31 @@ async def ingest_documents(request: IngestRequest):
         if not os.path.isdir(request.directory_path):
              raise HTTPException(status_code=404, detail=f"Répertoire non trouvé: {request.directory_path}")
 
-        # Utilisation de process_directory qui gère maintenant use_unstructured_processing
-        conversion_results = conversion.process_directory(
-            directory_path=request.directory_path,
-            use_unstructured_processing=request.use_unstructured_processing,
-            unstructured_base_output_dir=request.unstructured_base_output_dir
-        )
+        # Utilisation de process_directory pour une gestion plus centralisée si souhaité à l'avenir
+        # Pour l'instant, on itère sur les fichiers et appelle run_conversion
+        # comme dans les versions précédentes pour minimiser les changements de logique ici.
+        files_to_process = [
+            os.path.join(request.directory_path, f)
+            for f in os.listdir(request.directory_path)
+            if os.path.isfile(os.path.join(request.directory_path, f))
+        ]
+        
+        # Exemple d'utilisation de process_directory si on voulait l'utiliser ici :
+        # conversion_results = conversion.process_directory(
+        #     directory_path=request.directory_path,
+        #     # use_unstructured_processing=True, # Exemple
+        #     # unstructured_base_output_dir="./unstructured_output" # Exemple
+        # )
+        # for file_path, (raw_text, converter) in conversion_results.items():
+        #    filename = os.path.basename(file_path)
+        #    ... (suite du traitement)
 
-        for file_path, (raw_text, converter) in conversion_results.items():
+        for file_path in files_to_process:
             filename = os.path.basename(file_path)
-            logging.info(f"Traitement du fichier: {filename} (converti par: {converter})")
+            logging.info(f"Traitement du fichier: {filename}")
             
+            raw_text, converter = conversion.run_conversion(file_path)
+
             if raw_text is None:
                 logging.error(f"Échec conversion: {filename}")
                 failed_files.append(filename)

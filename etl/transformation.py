@@ -5,16 +5,11 @@ Utilise les modèles Pydantic définis dans core.models.
 """
 import logging
 import datetime
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, Tuple 
 
-# Importer les modèles Pydantic depuis core
-from core.models import DocumentMetadata, ExtractedEntities, LogEntry
-# Importer les wrappers de nettoyage et d'extraction
-from .cleaning import run_cleaning
-from .extraction import run_extraction
-
-# Supposer que le script original n'est plus directement appelé ici,
-# mais que sa logique est intégrée ou remplacée par les wrappers.
+from AGENT_VF.core.models import DocumentMetadata, ExtractedEntities, LogEntry
+from AGENT_VF.etl.cleaning import run_cleaning
+from AGENT_VF.etl.extraction import run_extraction # Assurez-vous que cet import est correct
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -23,18 +18,11 @@ def transform_to_log_entry(
     source_filename: str,
     source_file_path: Optional[str] = None,
     converter_used: Optional[str] = None
+    # entry_id n'est plus un argument
     ) -> Optional[LogEntry]:
     """
     Orchestre le nettoyage, l'extraction et la création d'un objet LogEntry.
-
-    Args:
-        raw_text (str): Le texte brut original.
-        source_filename (str): Nom du fichier source.
-        source_file_path (Optional[str]): Chemin complet du fichier source.
-        converter_used (Optional[str]): Nom du convertisseur utilisé.
-
-    Returns:
-        Optional[LogEntry]: L'objet LogEntry structuré ou None en cas d'échec.
+    L'entry_id est auto-généré par Pydantic.
     """
     logging.info(f"Lancement de la transformation pour: {source_filename}")
     if not raw_text:
@@ -42,31 +30,31 @@ def transform_to_log_entry(
         return None
 
     try:
-        # 1. Nettoyer le texte brut
         cleaned_text = run_cleaning(raw_text)
         if not cleaned_text:
             logging.warning(f"Texte nettoyé vide pour {source_filename}. Skip transformation.")
             return None
 
-        # 2. Extraire les métadonnées (date, entités)
-        # Utiliser cleaned_text pour l'extraction peut être plus fiable
-        entry_date, extracted_entities_dict = run_extraction(cleaned_text, source_filename)
+        # S'assurer que run_extraction retourne bien un tuple de deux éléments
+        extraction_result: Tuple[Optional[datetime.date], Dict[str, Any]] = run_extraction(cleaned_text, source_filename)
+        entry_date, extracted_entities_dict = extraction_result
+        
+        entities_payload = extracted_entities_dict if isinstance(extracted_entities_dict, dict) else {}
 
-        # 3. Créer l'objet DocumentMetadata
+
         doc_meta = DocumentMetadata(
             source_filename=source_filename,
             source_file_path=source_file_path,
             converter_used=converter_used
         )
 
-        # 4. Créer l'objet ExtractedEntities
-        entities = ExtractedEntities(**(extracted_entities_dict or {}))
+        entities = ExtractedEntities(**entities_payload)
 
-        # 5. Créer l'objet LogEntry final
         log_entry = LogEntry(
+            # entry_id est auto-généré
             document_metadata=doc_meta,
             entry_date=entry_date,
-            raw_text=raw_text, # Garder le texte brut si utile
+            raw_text=raw_text,
             cleaned_text=cleaned_text,
             extracted_entities=entities
         )
@@ -74,8 +62,13 @@ def transform_to_log_entry(
         logging.info(f"Transformation réussie pour {source_filename}. ID: {log_entry.entry_id}")
         return log_entry
 
-    except Exception as e:
-        logging.error(f"Erreur lors de la transformation de {source_filename}: {e}", exc_info=True)
+    except ValueError as ve:
+        if "not enough values to unpack" in str(ve) or "too many values to unpack" in str(ve):
+            logging.error(f"Erreur de déballage des valeurs de run_extraction pour {source_filename}: {ve}. "
+                          f"Vérifiez que AGENT_VF.etl.extraction.run_extraction (et par extension etl_scripts.extraction.extract_metadata) retourne bien un tuple (date, dict_entites).", exc_info=True)
+        else:
+            logging.error(f"Erreur de valeur lors de la transformation de {source_filename}: {ve}", exc_info=True)
         return None
-
-# End of file
+    except Exception as e:
+        logging.error(f"Erreur inattendue lors de la transformation de {source_filename}: {e}", exc_info=True)
+        return None
