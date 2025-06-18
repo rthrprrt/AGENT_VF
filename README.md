@@ -20,6 +20,44 @@ L'agent utilise une architecture modulaire open-source pour gérer le cycle de v
 **Aucune dépendance externe propriétaire ou cloud n'est requise pour l'exécution principale.**
 
 ## Architecture
+```mermaid
+graph TD
+   subgraph "API"
+       A[FastAPI] -->|ingest| B[ETL]
+       A -->|generate| C[Agent]
+   end
+   
+   subgraph "ETL Pipeline"
+       B -->|convert| D[Doc Parser]
+       D -->|clean| E[Text Cleaner] 
+       E -->|extract| F[NLP Processor]
+       F -->|index| G[Vector DB]
+   end
+   
+   subgraph "AI Agent"
+       C -->|orchestrate| H[LangGraph]
+       H -->|retrieve| I[RAG]
+       H -->|generate| J[Writer]
+       H -->|validate| K[Validator]
+       
+       I --> G
+       J --> L[Ollama LLM]
+       K -.->|retry| J
+   end
+   
+   subgraph "Storage"
+       G[(ChromaDB)]
+       M[Reports]
+       N[Config Files]
+   end
+   
+   H --> M
+   N --> H
+   
+   %% External
+   O[Documents] --> B
+   L --> P[gemma:7b]
+```
 
 Le projet AGENT_VF est organisé selon la structure suivante :
 AGENT_VF/
