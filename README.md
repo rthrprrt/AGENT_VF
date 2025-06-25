@@ -59,6 +59,7 @@ graph TD
    L --> P[gemma:7b]
 ```
 
+```
 Le projet AGENT_VF est organisé selon la structure suivante :
 AGENT_VF/
 ├── api/                  # API du service
@@ -99,6 +100,7 @@ AGENT_VF/
 ├── .env.example          # Exemple de configuration
 ├── README.md             # Documentation
 └── requirements.txt      # Dépendances
+```
 
 ## Installation
 
