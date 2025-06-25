@@ -1,6 +1,6 @@
 # --- AGENT_VF/README.md ---
 
-# Agent IA de Rédaction de Mémoire d'Alternance (Version Locale)
+# Agent IA de Rédaction de Mémoire d'Alternance
 
 Ce projet contient un agent IA **100% local** conçu pour assister à la rédaction de mémoires de mission professionnelle, basé sur LangGraph pour l'orchestration.
 
